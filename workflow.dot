@@ -1,0 +1,24 @@
+
+digraph workflow{
+	size = "50,50!";
+	
+	subgraph cluster_0 {
+		style=filled;
+		color=lightgrey;
+		node [style=filled,color=white];
+		blessed -> developmental[label="fork"];
+		label = "Codebeamer repos"
+	}
+	
+	subgraph cluster_1{
+	style=filled;
+	color=chartreuse
+	node [style=filled,color=white]
+	dev_private;
+	label = "TortoiseHg"
+	}
+	developmental -> blessed[label="pull request, merge"];
+	dev_private -> developmental[label ="push"];
+	blessed -> dev_private[label="clone, pull"];
+	dev_private -> collaborator[label="upload diffs"];
+}
